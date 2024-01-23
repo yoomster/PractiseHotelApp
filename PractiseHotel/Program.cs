@@ -1,7 +1,12 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using PractiseHotel.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<PractiseHotelContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PractiseHotelContext") ?? throw new InvalidOperationException("Connection string 'PractiseHotelContext' not found.")));
 
 var app = builder.Build();
 
